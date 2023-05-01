@@ -4,16 +4,17 @@ import { auth } from "../firebase/firebase";
 import { Home } from "../pages/Home";
 import { Layout } from "../layouts/Layout";
 import { Login } from "../pages/Login";
+import { Dashboard } from "../pages/Dashboard";
 import { SingUp } from "../pages/SingUp";
 
 export const MyRoutes = () => {
   const [userName, setUserName] = useState([]);
-  //   useEffect(() => {
-  //     auth.onAuthStateChanged((user) => {
-  //       if (user) setUserName(user.displayName);
-  //       else setUserName("");
-  //     }, []);
-  //   });
+  useEffect(() => {
+    auth.onAuthStateChanged((user) => {
+      if (user) setUserName(user.displayName);
+      else setUserName("");
+    }, []);
+  });
 
   return (
     <>
@@ -24,6 +25,7 @@ export const MyRoutes = () => {
             <Route path="/login" element={<Login />} />
             <Route path="/singup" element={<SingUp />} />
           </Route>
+          <Route path="/dashboard" element={<Dashboard name={userName} />} />
         </Routes>
       </BrowserRouter>
     </>
